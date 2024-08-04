@@ -1,7 +1,7 @@
 public class Counter {
     static int id = 0;
 
-    public static int getAndIncreaseId() {
+    public static int getAndIncrease() {
         return id++;
     }
 
