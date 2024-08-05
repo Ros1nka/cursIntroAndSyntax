@@ -3,6 +3,7 @@ public class Utils {
         for (Employee employee : employees) {
             System.out.println(employee.toString());
         }
+        System.out.println();
     }
 
     public static double monthSum(Employee[] employees) {
@@ -37,13 +38,13 @@ public class Utils {
         return id;
     }
 
-    public static double averangeSalary(Employee[] employees) {
-        return (double) monthSum(employees) / employees.length;
+    public static double averageSalary(Employee[] employees) {
+        return monthSum(employees) / employees.length;
     }
 
-    public static void indexOfSalary(Employee[] employees, int arg) {
-        for (int i = 0; i < employees.length; i++) {
-            employees[i].setSalary(employees[i].getSalary() * (1 + (double) arg / 100));
+    public static void indexTheSalary(Employee[] employees, int arg) {
+        for (Employee employee : employees) {
+            employee.setSalary(employee.getSalary() * (1 + (double) arg / 100));
         }
     }
 
@@ -70,4 +71,72 @@ public class Utils {
         }
         return id;
     }
+
+    public static double sumSalaryDepartment(Employee[] employees, int departmentNumber) {
+        double sum = 0;
+        for (Employee employee : employees) {
+            sum += departmentNumber == employee.getDepartment() ? employee.getSalary() : 0;
+        }
+        return sum;
+    }
+
+    public static double averageSalaryDepartment(Employee[] employees, int departmentNumber) {
+        int count = 0;
+        for (Employee employee : employees) {
+            count += departmentNumber == employee.getDepartment() ? 1 : 0;
+        }
+        return sumSalaryDepartment(employees, departmentNumber) / count;
+    }
+
+    public static void indexTheSalaryDepartment(Employee[] employees, int departmentNumber, int arg) {
+        for (Employee employee : employees) {
+            if (departmentNumber == employee.getDepartment()) {
+                employee.setSalary(employee.getSalary() * (1 + (double) arg / 100));
+            }
+        }
+    }
+
+    public static void printEmployeesDeportment(Employee[] employees, int departmentNumber) {
+        System.out.println("Сотрудники отдела №" + departmentNumber + ":");
+        for (Employee employee : employees) {
+            if (departmentNumber == employee.getDepartment()) {
+                System.out.printf("    " + employee.getId() + " " + employee.getLastName() + " " + employee.getFirstName() +
+                        " " + employee.getPatronymic() + ", ЗП= %.2f%n", employee.getSalary());
+            }
+        }
+        System.out.println();
+    }
+
+    public static void printSalaryIsLess(Employee[] employees, int parameter) {
+        boolean isNone = true;
+        System.out.println("Сотрудники с ЗП меньше " + parameter + ":");
+        for (Employee employee : employees) {
+            if (employee.getSalary() < parameter) {
+                System.out.printf("    " + employee.getId() + " " + employee.getLastName() + " " + employee.getFirstName() +
+                        " " + employee.getPatronymic() + ", ЗП= %.2f%n", employee.getSalary());
+                isNone = false;
+            }
+        }
+        if (isNone) {
+            System.out.println("    Таких сотрудников нет");
+        }
+        System.out.println();
+    }
+
+    public static void printSalaryIsMore(Employee[] employees, int parameter) {
+        boolean isNone = true;
+        System.out.println("Сотрудники с ЗП больше " + parameter + ":");
+        for (Employee employee : employees) {
+            if (employee.getSalary() >= parameter) {
+                System.out.printf("    " + employee.getId() + " " + employee.getLastName() + " " + employee.getFirstName() +
+                        " " + employee.getPatronymic() + ", ЗП= %.2f%n", employee.getSalary());
+                isNone = false;
+            }
+        }
+        if (isNone) {
+            System.out.println("    Таких сотрудников нет");
+        }
+        System.out.println();
+    }
 }
+

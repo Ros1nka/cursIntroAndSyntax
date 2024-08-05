@@ -78,6 +78,6 @@ public class Employee {
     }
 
     public String getIdAndName() {
-        return "id:" + id + ", " + lastName + " " + firstName.charAt(0) + ". " + patronymic.charAt(0) + ".";
+        return "id " + id + ", " + lastName + " " + firstName.charAt(0) + ". " + patronymic.charAt(0) + ".";
     }
 }
